@@ -1,0 +1,49 @@
+System parameters:
+Nt= 120
+Nr= 6
+Nrf= 6
+Ns= 6
+K= 1
+Ncl= 1
+Nray= 4
+Array type= UPA
+Sub_Connected= True
+Sub_Structure_Type= fixed
+
+Training setup:
+Training method:unsupervised
+Device= cpu
+Use GPU= False
+Black_box Net= False
+Keep_Bias= False
+Wideband Net= False
+Residule= False
+Init_scheme= 2
+Iterative_Training= True
+Iterations_training= 3
+Increamental_Learning= False
+
+Loss_coef= 1
+Number of layers = 4
+Training seed = 1
+Testing seed = 101
+Traning Epoches= 100
+Traning dataset size= 100
+Traning batch size= 20
+Total number of training batches= 500
+Number of training steps per Epoch= 5
+
+Optimizer info:
+Optimizer type: Adam 
+Decayed learning rate: False
+Start learning rate= 0.0001
+Decay factor= 0.95
+Learning keep steps= 5
+Learning rate lower bound= 1e-05
+Weight decay= 0
+
+Testing setup: 
+Testing batch size: 10
+Iterations_testing: 10
+
+The training starts at the time= 2024-12-01 10-4239
