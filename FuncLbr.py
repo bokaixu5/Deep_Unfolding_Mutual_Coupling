@@ -1,14 +1,6 @@
 # -* coding: utf-8 -*-
-'''
-@File；FuncLbr.py
-@Author: Mengyuan Ma
-@Contact: mamengyuan410@gmail.com
-@Time: 2022-08-16 15:15
- This is the self-defined function/module library
-'''
 import numpy as np
 import torch
-
 from Global_Vars import *
 import math
 import torch.nn as nn

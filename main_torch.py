@@ -1,24 +1,8 @@
 # -*- oding:utf-8 -*-
-'''
-# @File: THz_Huge.py
-# @Author: Mengyuan Ma
-# @Contact: mamengyuan410@gmail.com
-# @Time: 2022-11-17 5:23 PM
-'''
 # -* coding: utf-8 -*-
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"]  =  "TRUE"
 import torch
-
-'''
-@File: DNN_mmWave_large.py
-@Author: Mengyuan Ma
-@Contact: mamengyuan410@gmail.com
-@Time: 2022-08-24 18:04
-
-This codes target for training large-sized systems. The training and testing data are firstly generated and stored into
-disk. In the training and testing phases, the required data are fetched from the disk.
-'''
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize_scalar

@@ -1,33 +1,19 @@
-function [FRF,FBB, comp] = MO_AltMin(Fopt, FRF)
-comp = 0;
-[Nt, Ns, K] = size(Fopt);
-Nrf = size(FRF,2);
-FBB = zeros(Nrf, Ns, K);
-if Nt > Nrf % HBF
-    y = [];
-    %FRF = exp(1i*unifrnd(0,2*pi,Nt,NRF));
-    while (isempty(y) || abs(y(1)-y(2)) > 1e-3)
-        y = [0,0];
-        for k = 1:K
-            FBB(:,:,k) = pinv(FRF) * Fopt(:,:,k);
-            comp = comp + Nt*Nrf^2 + count_flops(pinv(FRF),Fopt(:,:,k));
-            y(1) = y(1) + norm(Fopt(:,:,k) - FRF * FBB(:,:,k),'fro')^2;
-            comp = comp + count_flops(FRF,FBB(:,:,k)) + Nrf*Ns;
-        end
-        [FRF, y(2), comp_in] = sig_manif(Fopt, FRF, FBB);
-        comp = comp + comp_in;
-        %abs(y(1)-y(2))
-    end
-else
-    FRF = eye(Nrf);
-    FBB = Fopt;
+function [ FRF,FBB ] = MO_AltMin( Pmax_t,Fopt, NRF,sigma2_x,Y_tt_fd )
+
+[Nt, Ns] = size(Fopt);
+y = [];
+Niter=2;
+FRF = exp( 1i*unifrnd(0,2*pi,Nt,NRF) );
+%while(isempty(y) || abs(y(1)-y(2))>1e-3)
+for i=1:Niter
+    FBB = pinv(FRF) * Fopt;
+    y(1) = norm(Fopt - FRF * FBB,'fro')^2;
+    [FRF, y(2)] = sig_manif(Fopt, FRF, FBB);
 end
 
-for k = 1:K
-    FBB(:,:,k) = sqrt(Ns) * FBB(:,:,k) / norm(FRF * FBB(:,:,k),'fro');
-    if abs(norm(FRF * FBB(:,:,k),'fro')^2 - Ns) > 1e-4
-        error('check power constraint !!!!!!!!!!!!')
-    end
-end
 
+
+  numerator = sqrt(Pmax_t) * FBB;  % 分子部分
+    denominator = sqrt(trace(real(sigma2_x / 2 * (FRF*FBB)' * Y_tt_fd * (FRF*FBB))));  % 分母部分
+    FBB = numerator / denominator;  % 结果
 end

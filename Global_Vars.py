@@ -1,11 +1,4 @@
 # -* coding: utf-8 -*-
-'''
-@File；Global_Vars.py
-@Author: Mengyuan Ma
-@Contact: mamengyuan410@gmail.com
-@Time: 2022-08-15 15:45
-Configure global variables for DNN_mmWave_torch.py
-'''
 import os
 import torch
 import math
